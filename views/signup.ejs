@@ -1,0 +1,19 @@
+<% include ./partials/header %>
+<div class="container-fluid d-flex align-items-center" style="height: 100vh">
+    <div class="container">
+            <div class="logo h3 bg-dark text-white text-center mx-auto">B</div>
+            <h2 class="h2 text-center text-secondary">Signup</h2>
+            <br />
+            <form action="/user/new" method="POST" class="container form">
+                
+                <input type="text" class="form-control mb-4 py-2" placeholder="Username" name="username">
+                <input type="password" class="form-control mb-4 py-2" placeholder="Password" name="password">
+                <input type="email" class="form-control mb-4 py-2" placeholder="E-mail" name="email">
+                <br />
+                <div class="text-right">
+                        <button class=" btn btn-dark py-2 shadow">Submit</button>
+                </div>
+            </form>
+    </div>
+</div>
+<% include ./partials/footer %>

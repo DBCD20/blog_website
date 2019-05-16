@@ -1,0 +1,44 @@
+<% include ./partials/header %>
+<% include ./partials/navbar %>
+
+    <header class="container-fluid d-flex align-items-center shadow">
+        <div class="container text-center">
+            <h2 class="h1 text-white text-center">This is a blog website</h2>
+            <a href="/user/new" class="btn btn-outline-light mt-2">Get Started</a>
+        </div>
+    </header>
+    <main class="">
+        <section class="container mt-3 py-4">
+        <h4>Latest</h4>
+        <ul class="container-fluid">
+                    <% stories.map((s, i) => { %>
+                        <li class="d-flex py-3 justify-content-between">
+                            <div class="pr-2">
+                                <h6> 
+                                    <a href="" class="text-dark">
+                                        <%= s.title %>
+                                    </a> 
+                                </h6>
+                                <% if(i == 0){ %>
+                                  <p class="mb-0 pb-0 text-secondary">
+                                      <%= s.summary %>
+                                  </p>  
+                                <% } %>
+                                <small><%= s.author %></small>
+                               <small class="text-secondary"><%= s.date %></small>
+                            </div>
+                            <div>
+                                <img class="img-thumb" src='<%= s.img %>' />
+                            </div>
+                        </li>
+                    <% }) %>
+            </ul>
+            
+        </section>
+        <section class="bg-white login-form">
+            <form action="">
+
+            </form>
+        </section>
+    </main>
+<% include partials/footer %>
