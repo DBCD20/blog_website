@@ -16,7 +16,10 @@ const StorySchema = new mongoose.Schema({
     },
     tags:[{
         type: String
-    }]
+    }],
+    thumbnail: {
+        type: String
+    }
 });
 
 let Story = mongoose.model('Story', StorySchema);

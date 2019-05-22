@@ -1,0 +1,21 @@
+<% include ./partials/header %>
+<% include ./partials/navbar %>
+<main class="container-fluid d-flex jsutify-content-center" style="height: 100vh">
+    <div class="container align-self-center">
+        <form action="/blogs/create/new" method="POST" class="">
+            <input type="text" class="form-control my-4" id="title" name="title" placeholder="Title">
+            <textarea class="text-left border my-4" id="editor" name="body" id="content" cols="30" rows="10" contenteditable="true" style="height: 300px"></textarea>
+            <input class="form-control my-4" type="text" name="tag" placeholder="Insert tag e.g Technology">
+            <input class="form-control my-4" type="text" name="thumbnail" placeholder="Insert thumbnail image">
+            <div class="text-right py-2">
+                    <button class="btn btn-dark py-2 shadow">
+                        Submit
+                    </button>
+            </div> 
+                
+        </form>
+    </div>
+</main>
+
+
+<% include ./partials/footer %>

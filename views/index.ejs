@@ -4,7 +4,7 @@
     <header class="container-fluid d-flex align-items-center shadow">
         <div class="container text-center">
             <h2 class="h1 text-white text-center">This is a blog website</h2>
-            <a href="/user/new" class="btn btn-outline-light mt-2">Get Started</a>
+            <a href="/user/signup" class="btn btn-outline-light mt-2">Get Started</a>
         </div>
     </header>
     <main class="">
@@ -14,14 +14,14 @@
                     <% stories.map((s, i) => { %>
                         <li class="d-flex py-3 justify-content-between">
                             <div class="pr-2">
-                                <h6> 
+                                <h5> 
                                     <a href="" class="text-dark">
                                         <%= s.title %>
                                     </a> 
-                                </h6>
+                                </h5>
                                 <% if(i == 0){ %>
                                   <p class="mb-0 pb-0 text-secondary">
-                                      <%= s.summary %>
+                                      <%= s.summary.substr(0, 100) %>...
                                   </p>  
                                 <% } %>
                                 <small><%= s.author %></small>

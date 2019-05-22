@@ -1,27 +1,42 @@
-const express   = require('express');
-const router    = express.Router();
-const DB        = require('../models');
-const Joi       = require('@hapi/joi');
+const express        = require('express');
+const passport       = require('passport');
+const router         = express.Router();
+const DB             = require('../models');
 
 
-router.route('/new')
+router.route('/signup')
 .get((req, res) => {
-    return res.render('./signup');
+    if(!req.isAuthenticated()) return res.render('./signup');
+    return res.redirect('/');
 })
 .post((req, res) => {
     DB.User.create(req.body)
-    .then(d => {
-        console.log(d)
+    .then(newUser=> {
+            req.login(newUser, err => {
+                if(err){return next(err)};
+                return res.redirect('/')
+            })
+    })
+    .catch(e => {
+        console.log(e)
+        return res.render('./signup')
+    })
+});
+    router.route('/login')
+    .get((req, res) => {
+        if(!req.isAuthenticated()) return res.render('./login');
+        
         return res.redirect('/');
     })
-    .catch(e => console.log(e))
-});
+    
+    .post(passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/user/login'
+    }), (req, res, next) => {
+    });
+
+    router.route('/logout')
+    .get((req, res) => res.redirect('login'));
+
 
 module.exports = router;
-
-    // let schema = Joi.object.keys({
-    //     username: Joi.string().alphanum().min(5).max(30).required(),
-    //     password: Joi.string().regex(/^[a-zA-Z0-9]{5,15}$/),
-    //     birthday: 
-    //     email:  Joi.string().regex(/^[a-zA-Z0-9]{}\/)
-    // })

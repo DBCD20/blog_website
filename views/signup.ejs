@@ -1,17 +1,19 @@
 <% include ./partials/header %>
 <div class="container-fluid d-flex align-items-center" style="height: 100vh">
     <div class="container">
-            <div class="logo h3 bg-dark text-white text-center mx-auto">B</div>
-            <h2 class="h2 text-center text-secondary">Signup</h2>
+        <a href="/" class="logo h3 bg-dark text-white text-center mx-auto shadow-lg d-block">B</a>
+            <h2 class="h2 text-center text-white form-label mx-auto">Signup</h2>
             <br />
-            <form action="/user/new" method="POST" class="container form">
-                
-                <input type="text" class="form-control mb-4 py-2" placeholder="Username" name="username">
-                <input type="password" class="form-control mb-4 py-2" placeholder="Password" name="password">
-                <input type="email" class="form-control mb-4 py-2" placeholder="E-mail" name="email">
+            <form action="/user/signup" method="POST" class="container form">
+               
+                <input autocomplete='false' type="text" class="form-control mb-4 py-2" id="username" placeholder="Username" name="username">
+                <input autocomplete='false' type="password" class="form-control  mb-4 py-2" id="password" placeholder="Password" name="password">
+                <input autocomplete='false' type="email" class="form-control py-2" placeholder="E-mail" id="email" name="email">
+
+                <p class="d-block mb-4 py-3 text-center text-secondary">Already have an account? Click <a class="text-warning" href="/user/login"><strong>here</strong></a> to login</p>
                 <br />
                 <div class="text-right">
-                        <button class=" btn btn-dark py-2 shadow">Submit</button>
+                        <button class="btn btn-dark py-2 shadow">Submit</button>
                 </div>
             </form>
     </div>
