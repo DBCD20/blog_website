@@ -1,6 +1,7 @@
 const mongoose  = require('mongoose');
 const bcrypt    = require('bcryptjs');
 const SALT      = process.env.SALT;
+const passport  = require('passport')
 
 const UserSchema = new mongoose.Schema({
     username: {
@@ -35,13 +36,14 @@ UserSchema.pre('save', async function(next){
         next(err)
     }
 });
-UserSchema.methods.comparePassword = async function(loginPass, next) {
+UserSchema.methods.comparePassword = async function(loginPass, done, user) {
     try {
         let isMatch = await bcrypt.compare(loginPass, this.password);
-        return isMatch;
+        if(!isMatch) return done(null, isMatch);
+        return done(null, user)
     }
     catch(err){
-        next(err)
+      return console.log(err.message)
     }
 };
 

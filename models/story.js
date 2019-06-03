@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
+const Schema   = mongoose.Schema;
 
 
-const StorySchema = new mongoose.Schema({
+const StorySchema = new Schema({
     title: {
         type: String,
         required: true
@@ -9,9 +10,13 @@ const StorySchema = new mongoose.Schema({
     body: {
         type: String,
         required: true
-    },   
+    },
+    comments: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Comment'
+    }],
     author: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'User'
     },
     tags:[{
@@ -19,6 +24,13 @@ const StorySchema = new mongoose.Schema({
     }],
     thumbnail: {
         type: String
+    },
+    date: {
+        type: String
+    }
+}, {
+    timestamps: {
+        updatedAt: 'updated_at'
     }
 });
 

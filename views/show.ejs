@@ -1,0 +1,62 @@
+<% include ./partials/header %>
+<% include ./partials/navbar %>
+    <article>
+        <h1 class="h1 px-3 mt-3"><%= Story.title %></h1>
+        <div class="mb-3 px-3 pb-3">
+            <span  class="h3 _subheading">
+                Think of module.exports as the variable that gets returned from require()
+            </span>            <% if(isAuthor){ %>
+                &nbsp; <a href="/blogs/<%= Story._id %>/edit" id="editBlog" class="text-secondary">Edit</a>
+                       <span class="text-secondary">&nbsp;|&nbsp;</span>
+                       <a href="/blogs/<%= Story._id %>" id="deleteBlog" class="text-secondary">Delete</a>
+            <% } %>
+        </div>
+        <div class="px-3 heading3 d-flex align-items-center">
+            <img class="user-thumb" src="https://images.pexels.com/photos/34534/people-peoples-homeless-male.jpg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="">
+                <h3 class="_name px-3">
+                    <span class="capitalize text-dark"><%= Story.author.username %> <br />
+                    </span> <%= Story.date %>
+                </h3>
+        </div>
+        
+        <img class="img-header  my-4" src="<%= Story.thumbnail %>" alt="">
+        <div class="storyBody p-4"><%- Story.body %></div>
+    </article>
+    <div class="px-3">
+        <span class='h3'>
+            Comments
+        </span>
+    </div>
+    <section class="px-3">
+        <article class="add_comment my-3 p-1">
+            <form action="" id="commentForm">
+                    <textarea id="bodyText" class="form-control" rows="4" type="text" name="text"></textarea>
+                    <div class="text-right">
+                         <button id="submit" class="btn">Add</button>
+                    </div>
+            </form>
+    </section>
+    <section class="comment_section px-3">
+
+        </article>
+        <article class="_comment d-flex px-3 py-2">
+                <img class="user-thumb" src="https://images.pexels.com/photos/34534/people-peoples-homeless-male.jpg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="">
+            <div class="mx-3">
+                <span class="name">Dave</span><span class="_name">&nbsp;<strong>&middot;</strong>&nbsp; June 28, 2015</span>
+                <p>
+                    Clone the repo for part one (skip this step if you followed part one and you are continuing with your own code) by opening your terminal, navigating to your project directory and executing each of the following lines of code: 
+                </p>
+                <small class='text-secondary py-1'>
+                    <a class="text-dark" href="">Reply</a>
+                    &nbsp;|&nbsp;
+                    <a class="text-dark" href="">Delete</a>
+                </small>
+            </div>
+        </article>
+    </section>
+    <div class="p-3 text-right">
+        <u>
+            <a href="/" class="text-dark">Go back</a>
+        </u>
+    </div>
+<% include ./partials/footer %> 

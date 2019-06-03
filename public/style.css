@@ -1,3 +1,5 @@
+
+
 header {
     height: 300px;
     background: linear-gradient(to right, rgba(0,0,0,0.6), rgba(0,0,0,0.7)),
@@ -5,9 +7,24 @@ header {
     background-size: cover;
     background-attachment: fixed, scroll;
 }
+._subheading {
+    color: #5f5f5f;
+}
+._name {
+    text-transform: capitalize;   
+    color: rgb(153, 153, 153);
+     font-size: 0.9em;
+     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
 .img-thumb {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+}
+.img-header {
+    width: 600px;
+    height: 300px;
+    max-width: 100%;
     object-fit: cover;
 }
 .login-form {
@@ -24,6 +41,8 @@ footer {
 }
 p {
     line-height: 1.3 !important;
+    margin-bottom: 0.2em;
+    color: #5e5e5e;
 }
 .form-label {
     position: relative;
@@ -61,7 +80,7 @@ input:focus {
     background: gray;
 }
 .ck.ck-editor__editable_inline {
-    min-height: 300px;
+    height: 300px;
    background-color: #f5f5f5 !important;
    border: none;
    margin-bottom: 2em;
@@ -69,4 +88,51 @@ input:focus {
 .ck.ck-toolbar {
     background: #ebeaea;
     border-color: #ebeaea;
+}
+.categories {
+    height: 300px;
+    background: black;
+}
+.capitalize {
+    text-transform: capitalize;
+}
+.storyBody > p {
+    margin-bottom: 0.9em !important;
+}
+.user-thumb {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 100%;
+}
+._article_body > p {
+    font-size: 0.9em !important;
+}
+.user-icon {
+    width: 19px;
+    height: 19px;
+    object-fit: cover;
+    border-radius: 100%;
+}
+.comment_section article div p {
+    font-size: 0.9em !important;
+}
+.comment_section article div .name {
+    text-transform: capitalize;
+    font-weight: 700;
+    font-size: 0.9em;
+}
+.comment_section article div .date {
+    font-size: 0.8em;
+}
+._comment {
+    background: #f3f3f3;
+
+}
+.add_comment {
+    background: #c9c9c9;
+} 
+.add_comment textarea {
+    border: none !important;
+    background: #f8f8f8 !important;
 }

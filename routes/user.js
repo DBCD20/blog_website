@@ -28,7 +28,6 @@ router.route('/signup')
         
         return res.redirect('/');
     })
-    
     .post(passport.authenticate('local', {
         successRedirect: '/',
         failureRedirect: '/user/login'
@@ -36,7 +35,10 @@ router.route('/signup')
     });
 
     router.route('/logout')
-    .get((req, res) => res.redirect('login'));
+    .get((req, res) => {
+        req.logout();
+        res.redirect('login')
+    });
 
 
 module.exports = router;

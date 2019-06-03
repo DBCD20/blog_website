@@ -10,18 +10,22 @@ app.use(function(req,res, next){
     next();
 });
 
-const routes        = require('./routes');
-const PORT          = process.env.PORT || 3000;
-const secret        = process.env.SECRET;
-const passport      = require('passport');
-const session       = require('express-session');
-const DB            = require('./models');
+const { user, blog, api } = require('./routes');
+const PORT                = process.env.PORT || 3000;
+const secret              = process.env.SECRET;
+const passport            = require('passport');
+const session             = require('express-session');
+const DB                  = require('./models');
+const expressSanitizer    = require('express-sanitizer');
 
 // Passport config
 require('./config/passport')(passport);
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+//Placed below express.json and URLencoded
+app.use(expressSanitizer());
+
 app.use(express.static('./public'));
 
 app.use(session({ 
@@ -29,6 +33,12 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
+
+// ,
+// cookie: {
+//     httpOnly: true,
+//     secure: true
+// }
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -39,40 +49,19 @@ app.use( (req, res, next) => {
 
 app.set('view engine', 'ejs');
 
-let Stories = [
-    {
-        title: "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-        author: "Juan Dela Cruz",
-        summary: "REST (i.e. Representation State Transfer) is an architectural style for defining our routes. It is a way of mapping HTTP routes and the CRUD functionalities.",
-        date: "June 21, 2019",
-        img: 'https://images.pexels.com/photos/2250619/pexels-photo-2250619.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'
-    },
-    {
-        title: "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-        author: "Juan Dela Cruz",
-        date: "June 21, 2019",
-        img: 'https://images.pexels.com/photos/2191051/pexels-photo-2191051.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'
-    },
-    {
-        title: "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-        author: "Juan Dela Cruz",
-        date: "June 21, 2019",
-        img: 'https://images.pexels.com/photos/2238300/pexels-photo-2238300.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'
-    },
-    {
-        title: "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-        author: "Juan Dela Cruz",
-        date: "June 21, 2019",
-        img: 'https://images.pexels.com/photos/2262697/pexels-photo-2262697.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'
-    }
-]
-
 app.get('/', (req, res) => {
-    return res.status(200).render('./index', {stories: Stories});
-})
+    DB.Story.find()
+    .populate('author', 'username')
+    .exec((err, data) => {
+        if(err) return console.log(err);
+        return res.status(200).render('./index', { stories: data });
 
-app.use('/user', routes.user);
-app.use('/blogs', routes.blog);
+    }) 
+});
+
+app.use('/user', user);
+app.use('/blogs', blog);
+app.use('/blogs/api', api);
 
 app.get('*', (req, res) => { return res.render('./notfound')})
 //Error Handler

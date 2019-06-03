@@ -1,8 +1,9 @@
 <% include ./partials/header %>
 <% include ./partials/navbar %>
+
 <main class="container-fluid d-flex jsutify-content-center" style="height: 100vh">
     <div class="container align-self-center">
-        <form action="/blogs/create/new" method="POST" class="">
+        <form action="/blogs/create" method="POST" class="">
             <input type="text" class="form-control my-4" id="title" name="title" placeholder="Title">
             <textarea class="text-left border my-4" id="editor" name="body" id="content" cols="30" rows="10" contenteditable="true" style="height: 300px"></textarea>
             <input class="form-control my-4" type="text" name="tag" placeholder="Insert tag e.g Technology">
@@ -15,7 +16,14 @@
                 
         </form>
     </div>
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#editor' ),  {
+    toolbar: ['Heading', 'bold', 'italic', 'bulletedList', 'numberedList', 'blockQuote', 'Link', 'undo', 'redo' ]
+})
+    .catch( error => {
+        console.error( error );
+    });
+</script>
 </main>
-
-
 <% include ./partials/footer %>

@@ -8,37 +8,48 @@
         </div>
     </header>
     <main class="">
-        <section class="container mt-3 py-4">
-        <h4>Latest</h4>
-        <ul class="container-fluid">
-                    <% stories.map((s, i) => { %>
-                        <li class="d-flex py-3 justify-content-between">
-                            <div class="pr-2">
-                                <h5> 
-                                    <a href="" class="text-dark">
-                                        <%= s.title %>
-                                    </a> 
-                                </h5>
-                                <% if(i == 0){ %>
-                                  <p class="mb-0 pb-0 text-secondary">
-                                      <%= s.summary.substr(0, 100) %>...
-                                  </p>  
-                                <% } %>
-                                <small><%= s.author %></small>
-                               <small class="text-secondary"><%= s.date %></small>
-                            </div>
-                            <div>
-                                <img class="img-thumb" src='<%= s.img %>' />
-                            </div>
-                        </li>
-                    <% }) %>
-            </ul>
-            
+        <section class="container mt-3 px-0 py-4" style="max-width: 700px">
+        <h4 class="pl-3 pb-2 border-bottom">Latest</h4>
+        <% if(stories.length > 0){ %>
+        <ul class="container-fluid mt-0 pt-2">
+            <% stories.map((s) => { %>
+                <li class="d-flex mb-4 px-0 justify-content-between">
+                    <div class="pr-2 align-self-center">
+                        <h5 class="h5"> 
+                            <a href="/blogs/<%= s._id %>" class="text-dark">
+                                <strong><%= s.title %></strong>
+                            </a> 
+                        </h5>
+                        <div class="_article_body mb-0 pb-0">
+                            <%- s.body.substr(0, 100) %>...
+                        </div>
+                        <span class="_name">
+                            <img class="user-icon" src="https://images.pexels.com/photos/34534/people-peoples-homeless-male.jpg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="">
+                            <span class="capitalize text-dark"><%= s.author.username %></span>
+                            &nbsp;<strong>&middot;</strong>&nbsp;
+                            Posted <%= s.date %>
+                        
+                        </span>
+                    </div>
+                    <div>
+                        <img class="img-thumb" src='<%= s.thumbnail %>' />
+                    </div>
+                </li>
+            <% }) %>
+        </ul>
+        <% } else { %>
+            <p>No stories to load</p>
+        <% } %>    
         </section>
-        <section class="bg-white login-form">
-            <form action="">
-
-            </form>
+        <section class="categories text-white">
+            <h4 class="pl-3 p-2 border-bottom">Categories</h4>
+            <ul class="nav flex mx-auto">
+                <li class="nav-item pl-4 py-2">Technology</li>
+                <li class="nav-item pl-4 py-2">Lifestyle</li>
+                <li class="nav-item pl-4 py-2">Health</li>
+                <li class="nav-item pl-4 py-2">Travel</li>
+                <li class="nav-item pl-4 py-2">Parenting</li>
+            </ul>
         </section>
     </main>
 <% include partials/footer %>
