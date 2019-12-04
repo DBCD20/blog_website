@@ -1,0 +1,22 @@
+version: "3.3"
+
+services:
+  blog:
+    container_name: blog
+    build: ./
+    command: ["node", "app.js"]
+    working_dir: /usr/src/blog
+    ports:
+      - "3000:3020"
+  #   # volumes:
+  #   #   - ./:/usr/src/blog
+    links: 
+      - mongo
+    depends_on:
+      - "mongo"
+
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"

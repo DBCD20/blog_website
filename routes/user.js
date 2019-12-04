@@ -11,7 +11,7 @@ router.route('/signup')
 })
 .post((req, res) => {
     DB.User.create(req.body)
-    .then(newUser=> {
+    .then(newUser => {
             req.login(newUser, err => {
                 if(err){return next(err)};
                 return res.redirect('/')

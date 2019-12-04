@@ -19,9 +19,9 @@ const StorySchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    tags:[{
-        type: String
-    }],
+    tags: {
+        type: Array
+    },
     thumbnail: {
         type: String
     },

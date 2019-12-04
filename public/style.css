@@ -2,10 +2,15 @@
 
 header {
     height: 300px;
-    background: linear-gradient(to right, rgba(0,0,0,0.6), rgba(0,0,0,0.7)),
-    url('https://images.pexels.com/photos/2128026/pexels-photo-2128026.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500') no-repeat center;
+    background: linear-gradient(to left, rgba(0,0,0,0.2), rgba(0,0,0,0.3)),
+    url('https://images.pexels.com/photos/2410383/pexels-photo-2410383.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500https://images.pexels.com/photos/2410383/pexels-photo-2410383.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500') no-repeat center;
     background-size: cover;
-    background-attachment: fixed, scroll;
+    background-attachment: scroll, fixed;
+}
+@media(min-width: 900px){
+    header {
+        height: 450px;
+    }
 }
 ._subheading {
     color: #5f5f5f;
@@ -29,6 +34,15 @@ header {
 }
 .login-form {
     height: 400px;
+}
+.form-max {
+    max-width: 540px;
+}
+.blog-max {
+    max-width: 740px;
+}
+.blog-max > p {
+    max-width: 740px;
 }
 footer {
     height: 400px;
@@ -98,6 +112,7 @@ input:focus {
 }
 .storyBody > p {
     margin-bottom: 0.9em !important;
+    max-width: 600px !important;
 }
 .user-thumb {
     width: 50px;
@@ -107,6 +122,7 @@ input:focus {
 }
 ._article_body > p {
     font-size: 0.9em !important;
+    
 }
 .user-icon {
     width: 19px;

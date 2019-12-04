@@ -2,6 +2,7 @@ require('dotenv').config();
 const express   = require('express');
 const app       = express();
 const helmet    = require('helmet');
+const methodOverride = require('method-override');
 
 app.use(helmet());
 //USED TO CLEAR SESSION, LOGIN WILL NOT APPEAR WHEN BACK BUTTON WAS PRESSED
@@ -26,6 +27,7 @@ app.use(express.urlencoded({extended: true}));
 //Placed below express.json and URLencoded
 app.use(expressSanitizer());
 
+app.use(methodOverride('_method'))
 app.use(express.static('./public'));
 
 app.use(session({ 

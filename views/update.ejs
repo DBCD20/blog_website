@@ -3,7 +3,7 @@
 
 <main class="container-fluid d-flex jsutify-content-center" style="height: 100vh">
     <div class="container align-self-center">
-        <form id="editForm" action="/blogs/<%= Story._id %>" method="PUT" class="">
+        <form id="editForm" action="/blogs/<%= Story._id %>?_method=PUT" method="POST" class="">
             <input type="text" class="form-control my-4" id="title" name="title" placeholder="Title" value="<%= Story.title %>" />
             <textarea class="text-left border my-4" id="editor" name="body" id="content" cols="30" rows="10" contenteditable="true" style="height: 300px">
                 <%= Story.body %>
@@ -11,18 +11,21 @@
             <input class="form-control my-4" value="<%= Story.tags %>" type="text" name="tag" placeholder="Insert tag e.g Technology">
             <input class="form-control my-4" value="<%= Story.thumbnail %>" type="text" name="thumbnail" placeholder="Insert thumbnail image">
             <div class="text-right py-2">
-                    <button class="btn btn-dark py-2 shadow">
+                    <button type="submit" class="btn btn-dark py-2 shadow">
                         Submit
                     </button>
             </div> 
         </form>
     </div>
-    <script>
-        ClassicEditor
-            .create( document.querySelector( '#editor' ),  {
-    toolbar: ['Heading', 'bold', 'italic', 'bulletedList', 'numberedList', 'blockQuote', 'Link', 'undo', 'redo' ]
+<script>
+ClassicEditor
+.create( document.querySelector( '#editor' ),  {
+toolbar: ['Heading', 'bold', 'italic', 'bulletedList', 'numberedList', 'blockQuote', 'Link', 'undo', 'redo' ]
 })
-    .catch( error => {
-        console.error( error );
-    });
+.then(data => { textArea = data })
+.catch( error => {
+console.error( error );
+});
+       
 </script>
+<% include partials/footer %>

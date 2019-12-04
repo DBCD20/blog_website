@@ -32,7 +32,7 @@ if(req.user){
             console.log(newComment)
 //PUSH THE COMMENT ID TO THE STORY AS REFERENCE
             story.comments.push(data)
-            story.save( err => err ? console.log(err.message) : res.status(200).json({comment: data.body}) )
+            story.save( err => err ? console.log(err.message) : res.status(200).send({message: "success"}) )
         })
         .catch(err => console.log(err.messsage))
 })
@@ -43,24 +43,27 @@ router.route('/:id/comment/:commentId')
 .delete((req, res) => {
     Comment.findByIdAndDelete(req.params.commentId)
     .then(data => {
-        Story.findById(req.params.id)
-            .then(story => {
-                story.comments.remove(data)
-                story.save(err => console.log(err))
-                res.status(200).json({ message:"success" })
-            })
-            .catch(err => console.log(err.message, err))
+        Story.findById(req.params.id, async function(err, story){
+            try {
+                await story.comments.pull(data)
+                await story.save()
+                return res.status(200).send({message: "success"})
+            }
+            catch(err){
+                console.log(err)
+            }
+        });
+            // .then(story => {
+            //     story.comments.pull(data)
+            //     story.save();
+            //     console.log(story.comments)
+            // })
+            // .then(()=>{
+            //     return res.status(200).send({message: "success"})
+            // })
+            // .catch(err => console.log(err.message, err))
     })
     .catch(err => console.log(err.message, err))
 })
 
 module.exports = router;
-    // Story.findById(req.params.id)
-    //     .then(data => {
-    //         data.comments.pull(req.params.commentId)
-    //         data.save( err => err ? console.log(err) : null )
-    //     }).then(() => {
-    //         Comment.findByIdAndDelete(req.params.commentId)
-    //         .then(data => res.status(200).json({ message: 'success' }))
-    //         .catch(err => console.log(err)) 
-    //     }).catch( err => console.log(err))

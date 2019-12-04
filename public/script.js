@@ -1,5 +1,7 @@
 
-$(document).ready(function(){
+
+
+
 //GET CURRENT URL
 function throwUrl(){
     let currentUrl = window.location.href;
@@ -14,11 +16,7 @@ function throwUrl(){
 function fetchComments(){
     $.get(`/blogs/api/${throwUrl()}/comment`,
     comment => {
-        let parsedComment = JSON.parse(JSON.stringify(comment));
-        parsedComment.comments.map(data => {
-            // $('<article></article>',{
-            //     class
-            // }).text().appendTo('.comment_section')
+           comment.comments.map(data => {
             $('.comment_section').append(
             `<article class="_comment d-flex my-2 px-3 py-2">
                 <img class="user-thumb align-self-center" src="${data.thumb || 'https://images.unsplash.com/photo-1536697246787-1f7ae568d89a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60'}" alt="">
@@ -37,9 +35,17 @@ function fetchComments(){
         })
     });
 }
+    function deleteCommentRow(e){
+        e.preventDefault();
+        $.ajax({
+            method : 'DELETE',
+            url    : $('.delComment').attr('href')
+        })
+        .done(() => $(this).parent().parent().parent().remove())
+    }
+$(document).ready(function(){
 //FETCH COMMENT UPON LOADING
-
-
+fetchComments()
 $('#commentForm').submit(function(event){
     event.preventDefault();
 $.post(
@@ -52,13 +58,17 @@ $.post(
         return
     }
 )})
-$(document).on('click', '.delComment', function(e){
-    e.preventDefault();
-    e.stopPropagation();
-    $.ajax({
-        method  : 'DELETE',
-        url     : $('.delComment').attr('href')
-    })
-    .done(() => fetchComments)
+$('#deleteBlog').click(function(e){
+     e.preventDefault();
+     $.ajax({
+         method : 'DELETE',
+         url    : $(this).prop('href')
+     }).done(() => {
+        window.location.href="http://localhost:3020/"
+        })
+});
+
+$('.comment_section').on('click', '.delComment', deleteCommentRow);
+
 //END OF JQUERY FUNCTION
-})
+});
